@@ -1,2 +1,0 @@
-# TVAnimationsGestures
-TVAnimationsGestures TableView动画和手势
