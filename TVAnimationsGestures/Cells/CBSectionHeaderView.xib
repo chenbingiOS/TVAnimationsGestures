@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="CBSectionHeaderView">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="49"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ksM-DR-Hko">
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="49"/>
+                    <subviews>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="irA-gz-exz">
+                            <rect key="frame" x="16" y="2.5" width="44" height="44"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="44" id="kVe-gw-4o7"/>
+                                <constraint firstAttribute="height" constant="44" id="uuU-3b-4An"/>
+                            </constraints>
+                            <state key="normal" image="carat.png"/>
+                            <state key="selected" image="carat-open.png"/>
+                            <connections>
+                                <action selector="toggleOpen:" destination="iN0-l3-epB" eventType="touchUpInside" id="nxL-K9-BBZ"/>
+                            </connections>
+                        </button>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wQp-ti-gag">
+                            <rect key="frame" x="68" y="14" width="42" height="21"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstItem="wQp-ti-gag" firstAttribute="centerY" secondItem="ksM-DR-Hko" secondAttribute="centerY" id="Blf-RG-OKf"/>
+                        <constraint firstItem="irA-gz-exz" firstAttribute="centerY" secondItem="ksM-DR-Hko" secondAttribute="centerY" id="Tih-Is-8nk"/>
+                        <constraint firstItem="wQp-ti-gag" firstAttribute="leading" secondItem="irA-gz-exz" secondAttribute="trailing" constant="8" id="WpK-Qx-EOm"/>
+                        <constraint firstItem="irA-gz-exz" firstAttribute="leading" secondItem="ksM-DR-Hko" secondAttribute="leading" constant="16" id="nwS-08-LZB"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="ksM-DR-Hko" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="Czn-E7-pWv"/>
+                <constraint firstAttribute="bottom" secondItem="ksM-DR-Hko" secondAttribute="bottom" id="hJT-L8-NsU"/>
+                <constraint firstItem="ksM-DR-Hko" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="nv0-aL-i4c"/>
+                <constraint firstAttribute="trailing" secondItem="ksM-DR-Hko" secondAttribute="trailing" id="s2d-si-7jr"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
+            <point key="canvasLocation" x="33.5" y="363.5"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="carat-open.png" width="11" height="11"/>
+        <image name="carat.png" width="11" height="11"/>
+    </resources>
+</document>

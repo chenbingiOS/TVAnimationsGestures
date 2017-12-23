@@ -7,8 +7,15 @@
 //
 
 #import "AppDelegate.h"
+// Model
+#import "CBPlay.h"
+#import "CBQuotation.h"
+// VC
+#import "CBTableViewController.h"
 
 @interface AppDelegate ()
+
+@property (strong, nonatomic) NSMutableArray *plays;
 
 @end
 
@@ -16,36 +23,38 @@
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    // Override point for customization after application launch.
+    
+    UINavigationController *navigationController = (UINavigationController *)self.window.rootViewController;
+    CBTableViewController *tableViewController = (CBTableViewController *)navigationController.topViewController;
+    tableViewController.plays = self.plays;
+    
     return YES;
 }
 
-
-- (void)applicationWillResignActive:(UIApplication *)application {
-    // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
-    // Use this method to pause ongoing tasks, disable timers, and invalidate graphics rendering callbacks. Games should use this method to pause the game.
+- (NSMutableArray *)plays {
+    if (_plays == nil) {
+        NSURL *url = [[NSBundle mainBundle] URLForResource:@"PlaysAndQuotations" withExtension:@"plist"];
+        NSArray *playDictionariesArray = [NSArray arrayWithContentsOfURL:url];
+        _plays = [NSMutableArray arrayWithCapacity:playDictionariesArray.count];
+        
+        for (NSDictionary *playDictionary in playDictionariesArray) {
+            CBPlay *play = [CBPlay new];
+            play.playName = playDictionary[@"playName"];
+            
+            NSArray *quotationDictionaries = playDictionary[@"quotations"];
+            NSMutableArray *quotations = [NSMutableArray arrayWithCapacity:quotationDictionaries.count];
+            for (NSDictionary *quotationDictionary in quotationDictionaries) {
+                CBQuotation *quotation = [CBQuotation new];
+                [quotation setValuesForKeysWithDictionary:quotationDictionary];
+                [quotations addObject:quotation];
+            }
+            
+            play.quotations = quotations;
+            
+            [_plays addObject:play];
+        }
+    }
+    return _plays;
 }
-
-
-- (void)applicationDidEnterBackground:(UIApplication *)application {
-    // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
-    // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
-}
-
-
-- (void)applicationWillEnterForeground:(UIApplication *)application {
-    // Called as part of the transition from the background to the active state; here you can undo many of the changes made on entering the background.
-}
-
-
-- (void)applicationDidBecomeActive:(UIApplication *)application {
-    // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
-}
-
-
-- (void)applicationWillTerminate:(UIApplication *)application {
-    // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
-}
-
 
 @end
