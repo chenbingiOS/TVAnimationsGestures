@@ -20,6 +20,7 @@ static NSString *QuoteCellIdentifier = @"QuoteCellIdentifier";
 @interface CBTableViewController () <SectionHeaderViewDelegate>
 
 @property (strong, nonatomic) NSMutableArray *sectionInfoArray;
+@property (assign, nonatomic) NSInteger openSectionIndex;
 
 @end
 
@@ -47,9 +48,11 @@ static NSString *QuoteCellIdentifier = @"QuoteCellIdentifier";
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    self.openSectionIndex = NSNotFound;
+    
     self.tableView.sectionHeaderHeight = 48;
     UINib *sectionHeaderViewNib = [UINib nibWithNibName:@"CBSectionHeaderView" bundle:[NSBundle mainBundle]];
-    [self.tableView registerNib:sectionHeaderViewNib forCellReuseIdentifier:SectionHeaderViewIdentifier];
+    [self.tableView registerNib:sectionHeaderViewNib forHeaderFooterViewReuseIdentifier:SectionHeaderViewIdentifier];
 }
 
 #pragma mark - Table view data source
@@ -84,7 +87,68 @@ static NSString *QuoteCellIdentifier = @"QuoteCellIdentifier";
 }
 
 #pragma mark - SectionHeaderViewDelegate
-- (void)sectionHeaderView:(CBSectionHeaderView *)sectionHeaderView sectionOpened:(NSInteger)section {}
-- (void)sectionHeaderView:(CBSectionHeaderView *)sectionHeaderView sectionClosed:(NSInteger)section {}
+- (void)sectionHeaderView:(CBSectionHeaderView *)sectionHeaderView sectionOpened:(NSInteger)section {
+    CBSectionInfo *sectionInfo = self.sectionInfoArray[section];
+    sectionInfo.open = YES;
+    
+    // 需要展开的cell
+    NSUInteger countOfRowsInSection = sectionInfo.play.quotations.count;
+    NSMutableArray *indexPathsToInsert = [NSMutableArray new];
+    for (NSUInteger i = 0; i < countOfRowsInSection; i++) {
+        [indexPathsToInsert addObject:[NSIndexPath indexPathForRow:i inSection:section]];
+    }
+    
+    // 把其他的cell隐藏
+    NSMutableArray *indexPathsToDelete = [NSMutableArray new];
+    NSInteger previousOpenSectionIndex = self.openSectionIndex;
+    if (previousOpenSectionIndex != NSNotFound) {
+        
+        CBSectionInfo *previousSectionInfo = self.sectionInfoArray[previousOpenSectionIndex];
+        previousSectionInfo.open = NO;
+        [previousSectionInfo.sectionHeaderView toggleOpenWithUserAction:NO]; // 改变按钮UI
+        
+        NSUInteger countOfRowsToDelete = previousSectionInfo.play.quotations.count;
+        for (NSUInteger i = 0; i < countOfRowsToDelete; i++) {
+            [indexPathsToDelete addObject:[NSIndexPath indexPathForRow:i inSection:previousOpenSectionIndex]];
+        }
+    }
+    
+    
+    // 切换动画 如果是默认第一个，这第一个从上到下展开，如果是新一个，则前一个从下往上收起
+    UITableViewRowAnimation insertAnimation;
+    UITableViewRowAnimation deleteAnimation;
+    if (previousOpenSectionIndex == NSNotFound || section < previousOpenSectionIndex) {
+        insertAnimation = UITableViewRowAnimationTop;
+        deleteAnimation = UITableViewRowAnimationBottom;
+    } else {
+        insertAnimation = UITableViewRowAnimationBottom;
+        deleteAnimation = UITableViewRowAnimationTop;
+    }
+    
+    // 表格动画效果，多动作同时
+    [self.tableView beginUpdates];
+    [self.tableView insertRowsAtIndexPaths:indexPathsToInsert withRowAnimation:insertAnimation];
+    [self.tableView deleteRowsAtIndexPaths:indexPathsToDelete withRowAnimation:deleteAnimation];
+    [self.tableView endUpdates];
+    
+    self.openSectionIndex = section;
+}
+
+- (void)sectionHeaderView:(CBSectionHeaderView *)sectionHeaderView sectionClosed:(NSInteger)section {
+    CBSectionInfo *sectionInfo = self.sectionInfoArray[section];
+    sectionInfo.open = NO;
+    
+    // 需要隐藏的cell
+    NSUInteger countOfRowsToDelete = [self.tableView numberOfRowsInSection:section];
+    if (countOfRowsToDelete > 0) {
+        NSMutableArray *indexPathsToDelete = [NSMutableArray new];
+        for (NSUInteger i = 0; i < countOfRowsToDelete; i++) {
+            [indexPathsToDelete addObject:[NSIndexPath indexPathForRow:i inSection:section]];
+        }
+        [self.tableView deleteRowsAtIndexPaths:indexPathsToDelete withRowAnimation:UITableViewRowAnimationTop];
+    }
+ 
+    self.openSectionIndex = NSNotFound;
+}
 
 @end

@@ -24,4 +24,6 @@
 @property (weak, nonatomic) id <SectionHeaderViewDelegate> delegate;
 @property (assign, nonatomic) NSInteger section;
 
+- (void)toggleOpenWithUserAction:(BOOL)userAction;
+
 @end

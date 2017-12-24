@@ -1,26 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
-        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="CBSectionHeaderView">
-            <rect key="frame" x="0.0" y="0.0" width="375" height="49"/>
+            <rect key="frame" x="0.0" y="0.0" width="375" height="48"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ksM-DR-Hko">
-                    <rect key="frame" x="0.0" y="0.0" width="375" height="49"/>
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="48"/>
                     <subviews>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="irA-gz-exz">
-                            <rect key="frame" x="16" y="2.5" width="44" height="44"/>
+                            <rect key="frame" x="16" y="2" width="44" height="44"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="44" id="kVe-gw-4o7"/>
                                 <constraint firstAttribute="height" constant="44" id="uuU-3b-4An"/>
@@ -32,7 +31,7 @@
                             </connections>
                         </button>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wQp-ti-gag">
-                            <rect key="frame" x="68" y="14" width="42" height="21"/>
+                            <rect key="frame" x="68" y="13.5" width="42" height="21"/>
                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
@@ -47,15 +46,17 @@
                     </constraints>
                 </view>
             </subviews>
-            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
                 <constraint firstItem="ksM-DR-Hko" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="Czn-E7-pWv"/>
                 <constraint firstAttribute="bottom" secondItem="ksM-DR-Hko" secondAttribute="bottom" id="hJT-L8-NsU"/>
-                <constraint firstItem="ksM-DR-Hko" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="nv0-aL-i4c"/>
+                <constraint firstItem="ksM-DR-Hko" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="nv0-aL-i4c"/>
                 <constraint firstAttribute="trailing" secondItem="ksM-DR-Hko" secondAttribute="trailing" id="s2d-si-7jr"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
+            <connections>
+                <outlet property="disclosureButton" destination="irA-gz-exz" id="aD9-ca-Rxi"/>
+                <outlet property="titleLabel" destination="wQp-ti-gag" id="ibk-1P-egf"/>
+            </connections>
             <point key="canvasLocation" x="33.5" y="363.5"/>
         </view>
     </objects>

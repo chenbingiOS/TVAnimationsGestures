@@ -17,6 +17,7 @@
 		072131F31FEDE1F400F43A08 /* CBSectionHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 072131F21FEDE1F400F43A08 /* CBSectionHeaderView.xib */; };
 		072131F61FEDE69400F43A08 /* carat.png in Resources */ = {isa = PBXBuildFile; fileRef = 072131F41FEDE69400F43A08 /* carat.png */; };
 		072131F71FEDE69400F43A08 /* carat-open.png in Resources */ = {isa = PBXBuildFile; fileRef = 072131F51FEDE69400F43A08 /* carat-open.png */; };
+		0755E5B71FF065B500E85841 /* CBHighlightingTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0755E5B61FF065B500E85841 /* CBHighlightingTextView.m */; };
 		07BDAE831FED47CB00D4F9CC /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 07BDAE821FED47CB00D4F9CC /* AppDelegate.m */; };
 		07BDAE891FED47CB00D4F9CC /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 07BDAE871FED47CB00D4F9CC /* Main.storyboard */; };
 		07BDAE8B1FED47CB00D4F9CC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 07BDAE8A1FED47CB00D4F9CC /* Assets.xcassets */; };
@@ -41,6 +42,8 @@
 		072131F21FEDE1F400F43A08 /* CBSectionHeaderView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CBSectionHeaderView.xib; sourceTree = "<group>"; };
 		072131F41FEDE69400F43A08 /* carat.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = carat.png; sourceTree = "<group>"; };
 		072131F51FEDE69400F43A08 /* carat-open.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "carat-open.png"; sourceTree = "<group>"; };
+		0755E5B51FF065B500E85841 /* CBHighlightingTextView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CBHighlightingTextView.h; sourceTree = "<group>"; };
+		0755E5B61FF065B500E85841 /* CBHighlightingTextView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CBHighlightingTextView.m; sourceTree = "<group>"; };
 		07BDAE7E1FED47CB00D4F9CC /* TVAnimationsGestures.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TVAnimationsGestures.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		07BDAE811FED47CB00D4F9CC /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		07BDAE821FED47CB00D4F9CC /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -84,6 +87,8 @@
 				072131F21FEDE1F400F43A08 /* CBSectionHeaderView.xib */,
 				072131EB1FEDE1B200F43A08 /* CBQuoteCell.h */,
 				072131EC1FEDE1B200F43A08 /* CBQuoteCell.m */,
+				0755E5B51FF065B500E85841 /* CBHighlightingTextView.h */,
+				0755E5B61FF065B500E85841 /* CBHighlightingTextView.m */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -208,6 +213,7 @@
 				072131E71FEDD60F00F43A08 /* CBSectionInfo.m in Sources */,
 				072131F01FEDE1DB00F43A08 /* CBSectionHeaderView.m in Sources */,
 				07BDAE831FED47CB00D4F9CC /* AppDelegate.m in Sources */,
+				0755E5B71FF065B500E85841 /* CBHighlightingTextView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
