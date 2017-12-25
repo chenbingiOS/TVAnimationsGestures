@@ -18,5 +18,6 @@
 @property (weak, nonatomic) IBOutlet CBHighlightingTextView *quotationTextView;
 @property (strong, nonatomic) CBQuotation *quotation;
 
+@property (strong, nonatomic) UILongPressGestureRecognizer *longPressGesture;
 
 @end

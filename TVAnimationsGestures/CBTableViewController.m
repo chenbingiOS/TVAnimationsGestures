@@ -14,6 +14,17 @@
 #import "CBQuoteCell.h"
 #import "CBSectionHeaderView.h"
 
+@interface CBEmailMenuItem : UIMenuItem
+
+@property (strong, nonatomic) NSIndexPath *indexPath;
+
+@end
+
+@implementation CBEmailMenuItem
+
+@end
+
+
 #define DEFAULT_ROW_HEIGHT 88
 
 static NSString *SectionHeaderViewIdentifier = @"SectionHeaderViewIdentifier";
@@ -84,6 +95,11 @@ static NSString *QuoteCellIdentifier = @"QuoteCellIdentifier";
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     CBQuoteCell *cell = [tableView dequeueReusableCellWithIdentifier:QuoteCellIdentifier];
+    
+    if (cell.longPressGesture == nil) {
+        UILongPressGestureRecognizer *longPressGesture = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(gestureLongPressHandle:)];
+        cell.longPressGesture = longPressGesture;
+    }
     
     CBSectionInfo *sectionInfo = self.sectionInfoArray[indexPath.section];
     cell.quotation = sectionInfo.play.quotations[indexPath.row];
@@ -212,4 +228,40 @@ static NSString *QuoteCellIdentifier = @"QuoteCellIdentifier";
     }
 }
 
+#pragma mark - EMail
+- (BOOL)canBecomeFirstResponder {
+    return YES;
+}
+
+- (void)gestureLongPressHandle:(UILongPressGestureRecognizer *)longPressGesture {
+    if (longPressGesture.state == UIGestureRecognizerStateBegan) {
+        
+        CGPoint pointLocation = [longPressGesture locationInView:self.tableView];
+        NSIndexPath *longPressedIndexPath = [self.tableView indexPathForRowAtPoint:pointLocation];
+        
+        if (longPressedIndexPath && (longPressedIndexPath.section != NSNotFound) && (longPressedIndexPath.row != NSNotFound)) {
+            
+            [self becomeFirstResponder];
+            CBEmailMenuItem *menuItem = [[CBEmailMenuItem alloc] initWithTitle:@"Email" action:@selector(buttonEmailMenuItemHandle:)];
+            menuItem.indexPath = longPressedIndexPath;
+            
+            UIMenuController *menuCtrl = [UIMenuController sharedMenuController];
+            menuCtrl.menuItems = @[menuItem];
+            
+            CGRect cellRect = [self.tableView rectForRowAtIndexPath:longPressedIndexPath];
+            cellRect.origin.y += 40.0;
+            [menuCtrl setTargetRect:cellRect inView:self.tableView];
+            [menuCtrl setMenuVisible:YES animated:YES];
+        }
+    }
+}
+
+- (void)buttonEmailMenuItemHandle:(UIMenuItem *)menuItem {
+    CBEmailMenuItem *menuItem = [[UIMenuController sharedMenuController] menuItems][0];
+//    if (menuItem.inde) {
+//        <#statements#>
+//    }
+}
+
 @end
+
