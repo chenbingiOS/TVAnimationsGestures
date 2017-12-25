@@ -14,6 +14,8 @@
 #import "CBQuoteCell.h"
 #import "CBSectionHeaderView.h"
 
+#define DEFAULT_ROW_HEIGHT 88
+
 static NSString *SectionHeaderViewIdentifier = @"SectionHeaderViewIdentifier";
 static NSString *QuoteCellIdentifier = @"QuoteCellIdentifier";
 
@@ -21,6 +23,9 @@ static NSString *QuoteCellIdentifier = @"QuoteCellIdentifier";
 
 @property (strong, nonatomic) NSMutableArray *sectionInfoArray;
 @property (assign, nonatomic) NSInteger openSectionIndex;
+
+@property (assign, nonatomic) CGFloat initialPinchHeight;
+@property (strong, nonatomic) NSIndexPath *pinchedIndexPath;
 
 @end
 
@@ -38,6 +43,12 @@ static NSString *QuoteCellIdentifier = @"QuoteCellIdentifier";
             sectionInfo.play = play;
             sectionInfo.open = NO;
             
+            NSNumber *defaultRowHeight = @(DEFAULT_ROW_HEIGHT);
+            NSUInteger countOfQuotation = sectionInfo.play.quotations.count;
+            for (NSUInteger i = 0; i < countOfQuotation; i++) {
+                [sectionInfo insertObject:defaultRowHeight inRowHeightsAtIndex:i];
+            }
+            
             [infoArray addObject:sectionInfo];
         }
         
@@ -53,6 +64,10 @@ static NSString *QuoteCellIdentifier = @"QuoteCellIdentifier";
     self.tableView.sectionHeaderHeight = 48;
     UINib *sectionHeaderViewNib = [UINib nibWithNibName:@"CBSectionHeaderView" bundle:[NSBundle mainBundle]];
     [self.tableView registerNib:sectionHeaderViewNib forHeaderFooterViewReuseIdentifier:SectionHeaderViewIdentifier];
+    
+    // 捏合手势
+    UIPinchGestureRecognizer *pinchGesture = [[UIPinchGestureRecognizer alloc] initWithTarget:self action:@selector(gesturePinchHandler:)];
+    [self.tableView addGestureRecognizer:pinchGesture];
 }
 
 #pragma mark - Table view data source
@@ -74,6 +89,11 @@ static NSString *QuoteCellIdentifier = @"QuoteCellIdentifier";
     cell.quotation = sectionInfo.play.quotations[indexPath.row];
     
     return cell;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    CBSectionInfo *sectionInfo = self.sectionInfoArray[indexPath.section];
+    return [[sectionInfo objectInRowHeightsAtIndex:indexPath.row] floatValue];
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
@@ -152,6 +172,44 @@ static NSString *QuoteCellIdentifier = @"QuoteCellIdentifier";
     }
  
     self.openSectionIndex = NSNotFound;
+}
+
+#pragma makr - Gesture
+- (void)gesturePinchHandler:(UIPinchGestureRecognizer *)pinchGesture {
+    if (pinchGesture.state == UIGestureRecognizerStateBegan) {
+        
+        CGPoint pointLocation = [pinchGesture locationInView:self.tableView];
+        NSIndexPath *newPinchIndexPath = [self.tableView indexPathForRowAtPoint:pointLocation];
+        self.pinchedIndexPath = newPinchIndexPath;
+        
+        CBSectionInfo *sectionInfo = self.sectionInfoArray[newPinchIndexPath.section];
+        self.initialPinchHeight  = [[sectionInfo objectInRowHeightsAtIndex:newPinchIndexPath.row] floatValue];
+        
+        [self updateForPinchScale:pinchGesture.scale atIndexPath:newPinchIndexPath];
+        
+    } else {
+         if (pinchGesture.state == UIGestureRecognizerStateChanged) {
+             [self updateForPinchScale:pinchGesture.scale atIndexPath:self.pinchedIndexPath];
+         } else if (pinchGesture.state == UIGestureRecognizerStateCancelled ||
+                    pinchGesture.state == UIGestureRecognizerStateEnded) {
+             self.pinchedIndexPath = nil;
+         }
+    }
+}
+
+- (void)updateForPinchScale:(CGFloat)scale atIndexPath:(NSIndexPath *)indexPath {
+    if (indexPath && (indexPath.section != NSNotFound) && (indexPath.row != NSNotFound)) {
+        CGFloat newHeight = round(MAX(self.initialPinchHeight * scale, DEFAULT_ROW_HEIGHT));
+        
+        CBSectionInfo *sectionInfo = self.sectionInfoArray[indexPath.section];
+        [sectionInfo replaceObjectInRowHeightsAtIndex:indexPath.row withObject:@(newHeight)];
+     
+        BOOL animationsEnabled = [UIView areAnimationsEnabled];
+        [UIView setAnimationsEnabled:NO];
+        [self.tableView beginUpdates];
+        [self.tableView endUpdates];
+        [UIView setAnimationsEnabled:animationsEnabled];
+    }
 }
 
 @end

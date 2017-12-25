@@ -9,45 +9,56 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Table View Controller-->
+        <!--Quotations-->
         <scene sceneID="1sX-66-wlM">
             <objects>
                 <tableViewController id="Rpp-CI-Kdt" customClass="CBTableViewController" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="T6M-SQ-OKO">
+                    <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="T6M-SQ-OKO">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="QuoteCellIdentifier" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="QuoteCellIdentifier" rowHeight="90" id="mM6-6D-qY3" customClass="CBQuoteCell">
-                                <rect key="frame" x="0.0" y="28" width="375" height="90"/>
+                            <tableViewCell contentMode="scaleToFill" restorationIdentifier="QuoteCellIdentifier" selectionStyle="default" indentationWidth="10" reuseIdentifier="QuoteCellIdentifier" rowHeight="88" id="mM6-6D-qY3" customClass="CBQuoteCell">
+                                <rect key="frame" x="0.0" y="28" width="375" height="88"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="mM6-6D-qY3" id="AhZ-gJ-J5I">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="89.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="87.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="au8-db-W3c">
-                                            <rect key="frame" x="16" y="11" width="42" height="21"/>
-                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="Character" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="au8-db-W3c">
+                                            <rect key="frame" x="12" y="12" width="285.5" height="16"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="16" id="yFl-gj-BU7"/>
+                                            </constraints>
+                                            <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tEB-zi-X2x">
-                                            <rect key="frame" x="317" y="12" width="42" height="21"/>
-                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Act, Scene" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tEB-zi-X2x">
+                                            <rect key="frame" x="297.5" y="12" width="65.5" height="16"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="pZD-fi-RAb" customClass="CBHighlightingTextView">
-                                            <rect key="frame" x="16" y="40" width="343" height="39"/>
-                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" editable="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="pZD-fi-RAb" customClass="CBHighlightingTextView">
+                                            <rect key="frame" x="12" y="28" width="351" height="59.5"/>
                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                             <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                         </textView>
                                     </subviews>
+                                    <constraints>
+                                        <constraint firstItem="pZD-fi-RAb" firstAttribute="top" secondItem="au8-db-W3c" secondAttribute="bottom" id="ECe-wX-4it"/>
+                                        <constraint firstItem="tEB-zi-X2x" firstAttribute="leading" secondItem="au8-db-W3c" secondAttribute="trailing" id="Gjz-CK-FZh"/>
+                                        <constraint firstAttribute="trailing" secondItem="tEB-zi-X2x" secondAttribute="trailing" constant="12" id="RNx-6h-orq"/>
+                                        <constraint firstItem="au8-db-W3c" firstAttribute="leading" secondItem="AhZ-gJ-J5I" secondAttribute="leading" constant="12" id="UNS-hg-4A7"/>
+                                        <constraint firstItem="au8-db-W3c" firstAttribute="top" secondItem="AhZ-gJ-J5I" secondAttribute="top" constant="12" id="VW9-93-0UM"/>
+                                        <constraint firstItem="tEB-zi-X2x" firstAttribute="centerY" secondItem="au8-db-W3c" secondAttribute="centerY" id="bsy-NC-gEM"/>
+                                        <constraint firstItem="pZD-fi-RAb" firstAttribute="leading" secondItem="au8-db-W3c" secondAttribute="leading" id="dbW-lt-dMN"/>
+                                        <constraint firstAttribute="bottom" secondItem="pZD-fi-RAb" secondAttribute="bottom" id="gye-xd-6kA"/>
+                                        <constraint firstItem="pZD-fi-RAb" firstAttribute="trailing" secondItem="tEB-zi-X2x" secondAttribute="trailing" id="oKo-wi-wFD"/>
+                                    </constraints>
                                 </tableViewCellContentView>
                                 <connections>
                                     <outlet property="actAndSceneLabel" destination="tEB-zi-X2x" id="FnV-Fe-HLh"/>
@@ -61,7 +72,7 @@
                             <outlet property="delegate" destination="Rpp-CI-Kdt" id="IUG-s3-7Wr"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" id="j0X-na-QOw"/>
+                    <navigationItem key="navigationItem" title="Quotations" id="j0X-na-QOw"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7nN-7L-pgw" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
