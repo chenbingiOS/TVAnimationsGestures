@@ -8,6 +8,15 @@
 
 #import <UIKit/UIKit.h>
 
+@class CBQuotation;
+@class CBHighlightingTextView;
+
 @interface CBQuoteCell : UITableViewCell
+
+@property (weak, nonatomic) IBOutlet UILabel *characterLabel;
+@property (weak, nonatomic) IBOutlet UILabel *actAndSceneLabel;
+@property (weak, nonatomic) IBOutlet CBHighlightingTextView *quotationTextView;
+@property (strong, nonatomic) CBQuotation *quotation;
+
 
 @end

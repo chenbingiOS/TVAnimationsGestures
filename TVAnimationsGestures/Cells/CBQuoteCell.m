@@ -7,18 +7,19 @@
 //
 
 #import "CBQuoteCell.h"
+#import "CBQuotation.h"
+#import "CBHighlightingTextView.h"
 
 @implementation CBQuoteCell
 
-- (void)awakeFromNib {
-    [super awakeFromNib];
-    // Initialization code
-}
-
-- (void)setSelected:(BOOL)selected animated:(BOOL)animated {
-    [super setSelected:selected animated:animated];
-
-    // Configure the view for the selected state
+- (void)setQuotation:(CBQuotation *)quotation {
+    if (_quotation != quotation) {
+        _quotation = quotation;
+        
+        self.characterLabel.text = _quotation.character;
+        self.actAndSceneLabel.text = [NSString stringWithFormat:@"Act %@, Scene %@", @(_quotation.act), @(_quotation.scene)];
+        self.quotationTextView.text = _quotation.quotation;
+    }
 }
 
 @end

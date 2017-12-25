@@ -10,6 +10,6 @@
 
 @interface CBHighlightingTextView : UITextView
 
-
+@property (assign, nonatomic, getter=isHightlightd) BOOL hightlightd;
 
 @end

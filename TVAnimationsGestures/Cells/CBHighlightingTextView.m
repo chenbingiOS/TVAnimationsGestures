@@ -10,12 +10,13 @@
 
 @implementation CBHighlightingTextView
 
-/*
-// Only override drawRect: if you perform custom drawing.
-// An empty implementation adversely affects performance during animation.
-- (void)drawRect:(CGRect)rect {
-    // Drawing code
+- (void)setHightlightd:(BOOL)hightlightd {
+    if (_hightlightd != hightlightd) {
+        _hightlightd = hightlightd;
+        
+        self.textColor = _hightlightd ? [UIColor whiteColor] : [UIColor blackColor];        
+    }
+    return;
 }
-*/
 
 @end

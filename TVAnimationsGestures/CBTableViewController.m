@@ -70,6 +70,9 @@ static NSString *QuoteCellIdentifier = @"QuoteCellIdentifier";
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     CBQuoteCell *cell = [tableView dequeueReusableCellWithIdentifier:QuoteCellIdentifier];
     
+    CBSectionInfo *sectionInfo = self.sectionInfoArray[indexPath.section];
+    cell.quotation = sectionInfo.play.quotations[indexPath.row];
+    
     return cell;
 }
 
